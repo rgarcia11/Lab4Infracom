@@ -63,3 +63,8 @@ while mensaje:
         mensaje = input('Por favor vuelva a ingresar el nombre del archivo, o deje vacio para terminar: ')
 cliente.close()
 print('Terminada comunicacion')
+
+
+############################################################
+#                       INTERFAZ!!
+############################################################
