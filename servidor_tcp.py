@@ -10,8 +10,7 @@ bind_ip = '0.0.0.0'
 bind_port = 5005
 TAM_BUFFER = 1024
 MAX_THREADS = 100
-NUM_THREADS = 0
-
+threads = []
 # Se crea el socket de espera y se conecta el servidor
 servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 servidor.bind((bind_ip, bind_port))
@@ -70,11 +69,14 @@ def manejador_clientes():
         puerto_cliente = direccion[1]
         print ('Se acepto una conexion desde {}:{}'.format(direccion[0], direccion[1]))
         ##Esto inicia el threading de la comunicacion para un solo cliente
-        thread_cliente = threading.Thread(
-            target=manejador_conexion,
-            args=(socket__conexion_servidor_cliente, nombre_cliente, puerto_cliente,)  #con la coma!!
-        )
-        thread_cliente.start()
+        e = threading.Event
+        if len(threads) < MAX_THREADS:
+            thread_cliente = threading.Thread(
+                target=manejador_conexion,
+                args=(socket__conexion_servidor_cliente, nombre_cliente, puerto_cliente,)  #con la coma!!
+            )
+            thread_cliente.start()
+            threads.append(thread_cliente)
         #Se espera 15 segundos para ver actividad en el thread, o se cierra
         thread_cliente.join(15)
         if thread_cliente.is_alive():
