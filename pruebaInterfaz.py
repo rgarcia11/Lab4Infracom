@@ -1,9 +1,10 @@
-#Creating a GUI for entering name
+from tkinter import *
+
 def xyz():
     global a
     print(a.get())
-from tkinter import *
-root=Tk()  #It is just a holder
+
+root=Tk()
 Label(root,text="Enter your name").grid(row=0,column=0) #Creating label
 a=Entry(root)           #creating entry box
 a.grid(row=7,column=8)

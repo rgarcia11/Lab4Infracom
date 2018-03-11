@@ -78,10 +78,7 @@ def manejador_clientes():
             thread_cliente.start()
             threads.append(thread_cliente)
         #Se espera 15 segundos para ver actividad en el thread, o se cierra
-        thread_cliente.join(15)
-        if thread_cliente.is_alive():
-            e.set()
-        thread_cliente.join()
+        thread_cliente.join(30)
 
 ##########################################################
 # Ahora si empieza el programa
