@@ -69,7 +69,7 @@ def manejador_clientes():
         puerto_cliente = direccion[1]
         print ('Se acepto una conexion desde {}:{}'.format(direccion[0], direccion[1]))
         hola = socket__conexion_servidor_cliente.recv(TAM_BUFFER)
-        if hola == b'Hola'
+        if hola == b'Hola':
             ##Esto inicia el threading de la comunicacion para un solo cliente
             e = threading.Event()
             if len(threads) < MAX_THREADS:
