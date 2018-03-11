@@ -30,6 +30,10 @@ def conexion_con_servidor():
     print('conectado')
     estado_conexion = 1
 
+    #saludo
+    saludo = 'Hola'
+    socket__conexion_servidor_cliente.sendto(str(saludo).encode(), (nombre_cliente, puerto_cliente))
+
     #Recibir e imprimir la lista de archivos
     lista_archivos = str(cliente.recv(TAM_BUFFER))
     if lista_archivos == b'Intente mas tarde':

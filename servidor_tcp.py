@@ -68,20 +68,25 @@ def manejador_clientes():
         nombre_cliente = direccion[0]
         puerto_cliente = direccion[1]
         print ('Se acepto una conexion desde {}:{}'.format(direccion[0], direccion[1]))
-        ##Esto inicia el threading de la comunicacion para un solo cliente
-        e = threading.Event()
-        if len(threads) < MAX_THREADS:
-            thread_cliente = threading.Thread(
-                target=manejador_conexion,
-                args=(socket__conexion_servidor_cliente, nombre_cliente, puerto_cliente,)  #con la coma!!
-            )
-            thread_cliente.start()
-            threads.append(thread_cliente)
-        #Se espera 15 segundos para ver actividad en el thread, o se cierra
-        thread_cliente.join(15)
-        if thread_cliente.is_alive():
-            e.set()
-        thread_cliente.join()
+        hola = socket__conexion_servidor_cliente.recv(TAM_BUFFER)
+        if hola == b'Hola'
+            ##Esto inicia el threading de la comunicacion para un solo cliente
+            e = threading.Event()
+            if len(threads) < MAX_THREADS:
+                thread_cliente = threading.Thread(
+                    target=manejador_conexion,
+                    args=(socket__conexion_servidor_cliente, nombre_cliente, puerto_cliente,)  #con la coma!!
+                )
+                thread_cliente.start()
+                threads.append(thread_cliente)
+            #Se espera 15 segundos para ver actividad en el thread, o se cierra
+            thread_cliente.join(15)
+            if thread_cliente.is_alive():
+                e.set()
+            thread_cliente.join()
+        else:
+            rtaerror = 'Error'
+            socket__conexion_servidor_cliente.sendto(str(rtaerror).encode(), (nombre_cliente, puerto_cliente))
 
 ##########################################################
 # Ahora si empieza el programa
