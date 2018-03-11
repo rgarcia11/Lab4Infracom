@@ -15,7 +15,7 @@ def bytes_to_number(b):
     return res
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-nombre_servidor = '127.0.0.1'
+nombre_servidor = '52.234.215.61'
 puerto_servidor = 5005
 TAM_BUFFER = 1024
 print('Intentare conectarme a {}:{}'.format(nombre_servidor, puerto_servidor))
@@ -45,18 +45,20 @@ while mensaje:
         tam_actual = 0
         buff = b""
         print('Recibiendo:')
-        while tam_actual < tam_archivo:
-            print('Tamanho actual del archivo: {}'.format(tam_actual))
-            print('Tamanho del archivo: {}'.format(tam_archivo))
-            progreso = tam_actual/tam_archivo*100
-            print('Recibiendo... {}%'.format(progreso))
-            archivo_recibir = cliente.recv(TAM_BUFFER)
-            if not archivo_recibir:
-                break
-            if len(archivo_recibir) + tam_actual > tam_archivo:
-                archivo_recibir = archivo_recibir[:tam_archivo-tam_actual]
-            buff += archivo_recibir
-            tam_actual += len(archivo_recibir)
+        with open(mensaje, 'wb') as f:
+            while tam_actual < tam_archivo:
+                print('Tamanho actual del archivo: {}'.format(tam_actual))
+                print('Tamanho del archivo: {}'.format(tam_archivo))
+                progreso = tam_actual/tam_archivo*100
+                print('Recibiendo... {}%'.format(progreso))
+                archivo_recibir = cliente.recv(TAM_BUFFER)
+                if not archivo_recibir:
+                    break
+                if len(archivo_recibir) + tam_actual > tam_archivo:
+                    archivo_recibir = archivo_recibir[:tam_archivo-tam_actual]
+                buff += archivo_recibir
+                tam_actual += len(archivo_recibir)
+                f.write(archivo_recibir)
         print('Termine de recibir')
         break
     else:
