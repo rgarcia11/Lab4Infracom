@@ -83,6 +83,7 @@ def pedir_archivo():
                     #print('Tamanho del archivo: {}'.format(tam_archivo))
                     progreso = tam_actual/tam_archivo*100
                     print('Recibiendo... {0:.1f}%'.format(progreso))
+
                     archivo_recibir = cliente.recv(TAM_BUFFER)
                     if not archivo_recibir:
                         break
@@ -90,7 +91,9 @@ def pedir_archivo():
                         archivo_recibir = archivo_recibir[:tam_archivo-tam_actual]
                     buff += archivo_recibir
                     tam_actual += len(archivo_recibir)
+                    print('chunk: {}'.format(archivo_recibir))
                     f.write(archivo_recibir)
+            print('Archivo: {}'.format(archivo_recibir))
             print('Termine de recibir')
             inicio_descarga = 0
             break

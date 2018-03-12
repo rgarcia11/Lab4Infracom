@@ -1,3 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,Latency,IdleTime,Connect
-1520815929836,2,TCP Sampler Text,200,OK,Thread Group 1-1,text,true,,79,0,1,1,2,0,1
-1520815929844,1,TCP Sampler Binary,200,OK,Thread Group 1-1,text,true,,30,0,1,1,1,0,0
