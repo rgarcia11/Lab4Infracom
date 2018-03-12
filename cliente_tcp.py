@@ -15,10 +15,15 @@ estado_conexion = 0
 inicio_descarga = 0
 #Termina la conexion
 def cerrar_conexion():
+    global estado_conexion
     estado_conexion = 0
     if cliente:
-        cliente.shutdown(socket.SHUT_RDWR)
-        cliente.close()
+        try:
+            cliente.shutdown(socket.SHUT_RDWR)
+            cliente.close()
+        except:
+            pass
+    print('Terminada comunicacion')
 
 #Maneja la conexion con el servidor
 def conexion_con_servidor():
@@ -29,10 +34,6 @@ def conexion_con_servidor():
     cliente.connect((nombre_servidor, puerto_servidor))
     print('conectado')
     estado_conexion = 1
-
-    #saludo
-    saludo = 'Hola'
-    socket__conexion_servidor_cliente.sendto(str(saludo).encode(), (nombre_cliente, puerto_cliente))
 
     #Recibir e imprimir la lista de archivos
     lista_archivos = str(cliente.recv(TAM_BUFFER))
@@ -58,9 +59,6 @@ def conexion_con_servidor():
         target=pedir_archivo
     )
     thread_archivo.start()
-
-
-    print('Terminada comunicacion')
 
 #peticion del archivo
 def pedir_archivo():
