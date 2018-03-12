@@ -79,10 +79,10 @@ def pedir_archivo():
             inicio_descarga = 1
             with open(mensaje, 'wb') as f:
                 while tam_actual < tam_archivo:
-                    print('Tamanho actual del archivo: {}'.format(tam_actual))
-                    print('Tamanho del archivo: {}'.format(tam_archivo))
+                    #print('Tamanho actual del archivo: {}'.format(tam_actual))
+                    #print('Tamanho del archivo: {}'.format(tam_archivo))
                     progreso = tam_actual/tam_archivo*100
-                    print('Recibiendo... {}%'.format(progreso))
+                    print('Recibiendo... {0:.1f}%'.format(progreso))
                     archivo_recibir = cliente.recv(TAM_BUFFER)
                     if not archivo_recibir:
                         break

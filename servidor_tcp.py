@@ -35,7 +35,7 @@ def manejador_conexion(socket__conexion_servidor_cliente, nombre_cliente, puerto
 
     #se recibe la peticion del archivo a enviar
     peticion = socket__conexion_servidor_cliente.recv(TAM_BUFFER)
-    print ('Recibi: {}'.format(peticion))
+    print ('Pidieron: {}'.format(peticion))
     #si la peticion no existe, espera una peticion correcta del cliente
     while not os.path.isfile(peticion):
         socket__conexion_servidor_cliente.sendto('No existe'.encode(), (nombre_cliente, puerto_cliente))
